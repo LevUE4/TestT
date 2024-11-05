@@ -40,8 +40,11 @@ bool is_neighbor(char current, char next) {
     
     int row_diff = row1 - row2;
     int col_diff = col1 - col2;
-    bool neighbor = (abs(row_diff) <= 1 && abs(col_diff) <= 1 &&
-                    (row_diff == 0 || col_diff == 0 || row_diff == -col_diff));
+    bool neighbor = (abs(row_diff) <= 1 && abs(col_diff) <= 1 &&  //находятся в соседнем квадрате
+                    (row_diff == 0 ||                             //Горизонтальные соседи
+                     col_diff == 0 ||                             //Вертикальные соседи
+                     row_diff == col_diff * (-1)));               //Oдна и та же клавиша и диагональные соседи.
+                                                                  //соседними считаются только элементы на побочной диагонали, вот почему на минус один домножается
 
 #ifdef DEBUG
     printf("Проверка соседства: '%c' и '%c' -> %s\n", current, next, neighbor ? "соседи" : "не соседи");
